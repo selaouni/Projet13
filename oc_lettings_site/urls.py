@@ -6,6 +6,15 @@ import lettings.views
 import profiles.views
 
 
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('', include('lettings.urls')),
+    path('', include('profiles.urls')),
+
+]
+
 #
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
@@ -16,12 +25,5 @@ import profiles.views
 #     path('profiles/<str:username>/', profiles.views.profile, name='profile'),
 # ]
 #
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('', include('lettings.urls')),
-    path('', include('profiles.urls')),
 
 
-
-]
