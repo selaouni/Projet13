@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   # running commands on a basic image
-  Hello-World:
+  Build:
     docker:
       - image: cimg/base:2021.04
         auth:
@@ -9,12 +9,12 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
-          name: Saying Hello
+          name: lintting
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+            echo 'lintting'
+            flake8
   # fetching code from the repo
-  Fetch-Code:
+  Test:
     docker:
       - image: cimg/base:2021.04
         auth:
@@ -23,12 +23,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Getting the Code
+          name: Testing my code
           command: |
-            ls -al
-            echo '^^^Your repo files^^^'
+            echo 'Test in progress'
+            pytest
   # running a node container
-  Using-Node:
+  Deploy:
     docker:
       - image: cimg/node:17.2
         auth:
@@ -42,10 +42,10 @@ jobs:
 workflows:
   Example-Workflow:
     jobs:
-      - Hello-World
-      - Fetch-Code:
+      - Build
+      - Test:
           requires:
-            - Hello-World
-      - Using-Node:
+            - Build
+      - Deploy:
           requires:
-            - Fetch-Code
+            - Test
