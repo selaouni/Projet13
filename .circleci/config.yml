@@ -33,7 +33,7 @@ jobs:
           auth:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD
-     steps:
+      steps:
       - checkout
       - run: my-deploy-commands
 # Orchestrate our job run sequence
