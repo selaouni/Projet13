@@ -1,52 +1,51 @@
 version: 2.1
-
-# Define the jobs we want to run for this project
 jobs:
-  build:
+  # running commands on a basic image
+  Hello-World:
     docker:
-      - image: alpine:3.15
+      - image: cimg/base:2021.04
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD 
-    steps: 
-      - checkout
-      - run: my-build-commands
-  linting:
-      docker:
-      - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  
-      - run: flake8
-  test:
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run:
+          name: Saying Hello
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
+  # fetching code from the repo
+  Fetch-Code:
     docker:
-      - image: alpine:3.15
+      - image: cimg/base:2021.04
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: pytest
-  deploy:
-      docker:
-        - image: alpine:3.15
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD
-      steps:
-      - checkout
-      - run: my-deploy-commands
-# Orchestrate our job run sequence
+      - run:
+          name: Getting the Code
+          command: |
+            ls -al
+            echo '^^^Your repo files^^^'
+  # running a node container
+  Using-Node:
+    docker:
+      - image: cimg/node:17.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run:
+          name: Running the Node Container
+          command: |
+            node -v
 workflows:
-  build_and_test:
+  Example-Workflow:
     jobs:
-      - build:
-      - linting:
+      - Hello-World
+      - Fetch-Code:
           requires:
-            - build
-      - test:
+            - Hello-World
+      - Using-Node:
           requires:
-            - linting
-      - deploy:
-          requires:
-            - test
+            - Fetch-Code
