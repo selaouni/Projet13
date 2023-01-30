@@ -8,6 +8,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD 
+    step: 
       - checkout
       - run: my-build-commands
   linting:
@@ -28,10 +29,10 @@ jobs:
       - run: pytest
   deploy:
       docker:
-      - image: alpine:3.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
+        - image: alpine:3.15
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD
      steps:
       - checkout
       - run: my-deploy-commands
