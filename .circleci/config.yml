@@ -25,9 +25,7 @@ jobs:
       - checkout
       - run:
           name: Testing my code
-          command: |
-            echo 'Test in progress'
-            pytest
+          command: pytest
   # running a node container
   Deploy:
     docker:
