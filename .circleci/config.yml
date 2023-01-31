@@ -6,31 +6,35 @@ jobs:
     docker:
       - image: cimg/base:2021.04
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: DOCKERHUB_USERNAME
+          password: DOCKERHUB_PAT  
     steps:
       - run:
-          name: lintting
-          command: flake8
+          name: build
+          command: python3 manage.py runserver 0.0.0.0:8000
+          ports:
+            - "8000:8000"
   # fetching code from the repo
-  Test:
+  Test & Lintting:
     docker:
       - image: cimg/base:2021.04
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: DOCKERHUB_USERNAME
+          password: DOCKERHUB_PAT  
     steps:
       - checkout
       - run:
-          name: Testing my code
-          command: pytest
+          name: Testing and lintting my code
+          command: |
+            flake8
+            pytest
   # running a node container
   Deploy:
     docker:
       - image: cimg/node:17.2
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: DOCKERHUB_USERNAME
+          password: DOCKERHUB_PAT  
     steps:
       - run:
           name: Running the Node Container
