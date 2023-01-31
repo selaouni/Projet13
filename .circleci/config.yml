@@ -15,7 +15,7 @@ jobs:
           ports:
             - "8000:8000"
   # fetching code from the repo
-  Test & Lintting:
+  Test-Lintting:
     docker:
       - image: cimg/base:2021.04
         auth:
