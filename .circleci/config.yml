@@ -44,9 +44,9 @@ workflows:
   Example-Workflow:
     jobs:
       - Build
-      - Test:
+      - Test-Lintting:
           requires:
             - Build
       - Deploy:
           requires:
-            - Test
+            - Test-Lintting
