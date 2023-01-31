@@ -41,7 +41,7 @@ jobs:
           command: |
             node -v
 workflows:
-  Example-Workflow:
+  Workflow-OC-Lettings:
     jobs:
       - Build
       - Test-Lintting:
