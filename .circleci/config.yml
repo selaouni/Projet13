@@ -4,7 +4,7 @@ jobs:
   # running commands on a basic image
   Build:
     docker:
-      - image: cimg/base:2021.04
+      - image: Python:3-alpine
         auth:
           username: DOCKERHUB_USERNAME
           password: DOCKERHUB_PAT  
@@ -17,7 +17,7 @@ jobs:
   # fetching code from the repo
   Test-Lintting:
     docker:
-      - image: cimg/base:2021.04
+      - image: Python:3-alpine
         auth:
           username: DOCKERHUB_USERNAME
           password: DOCKERHUB_PAT  
@@ -31,7 +31,7 @@ jobs:
   # running a node container
   Deploy:
     docker:
-      - image: cimg/node:17.2
+      - image: Python:3-alpine
         auth:
           username: DOCKERHUB_USERNAME
           password: DOCKERHUB_PAT  
