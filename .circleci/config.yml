@@ -11,9 +11,7 @@ jobs:
     steps:
       - run:
           name: lintting
-          command: |
-            echo 'lintting'
-            flake8
+          command: flake8
   # fetching code from the repo
   Test:
     docker:
