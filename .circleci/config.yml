@@ -5,9 +5,7 @@ jobs:
   Build:
     docker:
       - image: cimg/python:3.10
-        auth:
-          username: DOCKERHUB_USERNAME
-          password: DOCKERHUB_PAT  
+        
     steps:
       - run:
           name: build
@@ -18,9 +16,7 @@ jobs:
   Test-Lintting:
     docker:
       - image: cimg/python:3.10
-        auth:
-          username: DOCKERHUB_USERNAME
-          password: DOCKERHUB_PAT  
+        
     steps:
       - checkout
       - run:
@@ -32,9 +28,7 @@ jobs:
   Deploy:
     docker:
       - image: cimg/python:3.10
-        auth:
-          username: DOCKERHUB_USERNAME
-          password: DOCKERHUB_PAT  
+        
     steps:
       - run:
           name: Running the Node Container
