@@ -1,69 +1,25 @@
-# syntax=docker/dockerfile:1
-FROM python:3
+FROM python:3.10
+WORKDIR /myapp
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-WORKDIR /code
-COPY requirements.txt /code/
+#ENV PORT=8000
+
+CMD ["echo", "image Docket Orange County Letting"]
+
+RUN pip install --upgrade pip
+COPY ./requirements.txt /myapp/
 RUN pip install -r requirements.txt
-COPY . /code/
 
 
+COPY . /myapp
+EXPOSE 8000
 
+#RUN python manage.py collectstatic
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-
-# # base image
-# FROM python:3.8
-# # setup environment variable
-# ENV DockerHOME=/home/app/webapp
+#CMD python manage.py runserver
 #
-# # set work directory
-# RUN mkdir -p $DockerHOME
-#
-# # where your code lives
-# WORKDIR $DockerHOME
-#
-# # set environment variables
-# ENV PYTHONDONTWRITEBYTECODE 1
-# ENV PYTHONUNBUFFERED 1
-#
-# # install dependencies
-# RUN pip install --upgrade pip
-#
-# # copy whole project to your docker home directory.
-# COPY . $DockerHOME
-# # run this command to install all dependencies
-# RUN pip install -r requirements.txt
-# # port where the Django app runs
-# EXPOSE 8000
-# # start server
-# CMD python manage.py runserver
+#CMD gunicorn Python-OC-Lettings-FR.wsgi:application -- bind @.0.0.0:$PORT
 
 
-
-
-
-# FROM python: 3.10
-# ENV PYTHONDONTWRITEBYTECODE=1
-# ENV PYTHONUNBUFFERED=1
-# ENV PORT=8000
-#
-# WORKDIR /app
-#
-# COPY ./requirements.txt/app/
-# RUN pip install --upgrade pip
-# RUN pip install -r requirements.txt
-# COPY /app
-# RUN python manage.py collectstatic
-# CMD gunicorn oc_lettings_fr.wsgi:application --bind @.0.0.0:$PORT
-
-
-
-
-
-# syntax=docker/dockerfile:1
-# FROM node:18-alpine
-# WORKDIR /app
-# COPY . .
-# RUN yarn install --production
-# CMD ["node", "src/index.js"]
-# EXPOSE 3000
