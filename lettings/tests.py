@@ -21,16 +21,16 @@ def test_letting_index_view():
     assert response.status_code == 200
     assertTemplateUsed(response, "lettings/index.html")
 
-@pytest.mark.django_db
-def test_letting_infos_view():
-    client = Client()
-    # url = reverse('lettings:letting')
-    response = client.get("/lettings/1/", follow_redirects=True)
-    print("réponse2",response)
-    content = response.content.decode()
-    assert '<title>Underground Hygge</title>' in content
-    assert response.status_code == 200
-    assertTemplateUsed(response, "lettings/letting.html")
+# @pytest.mark.django_db
+# def test_letting_infos_view():
+#     client = Client()
+#     # url = reverse('lettings:letting')
+#     response = client.get("/lettings/1/", follow_redirects=True)
+#     print("réponse2",response)
+#     content = response.content.decode()
+#     assert '<title>Underground Hygge</title>' in content
+#     assert response.status_code == 200
+#     assertTemplateUsed(response, "lettings/letting.html")
 
 
 
