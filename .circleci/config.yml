@@ -26,12 +26,11 @@ jobs:
             pytest
   # running a node container
   Containerization:
-    step:
-      build:
-      run:
-      push:
-      pull:
-      run:
+    build:
+    run:
+    push:
+    pull:
+    run:
       
   Deploy:
     docker:
