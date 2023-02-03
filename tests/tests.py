@@ -1,13 +1,6 @@
-from django.test import TestCase
 import pytest
-from django.urls import reverse
 from django.test import Client
 from pytest_django.asserts import assertTemplateUsed
-from django.urls import reverse, resolve
-
-from lettings.models import Letting
-from lettings.models import Address
-
 
 
 @pytest.mark.django_db
