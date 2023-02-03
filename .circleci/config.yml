@@ -25,6 +25,14 @@ jobs:
             flake8
             pytest
   # running a node container
+  Containerization:
+    step:
+      build:
+      run:
+      push:
+      pull:
+      run:
+      
   Deploy:
     docker:
       - image: cimg/python:3.10
