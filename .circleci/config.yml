@@ -1,53 +1,68 @@
+
 version: 2.1
 
+
 jobs:
-  # running commands on a basic image
-  Build:
+  build-test-lintting:
+
     docker:
+      # available images on: https://circleci.com/developer/images/image/cimg/python
       - image: cimg/python:3.10
-        
-    steps:
-      - run:
-          name: build
-          command: python3 manage.py runserver 0.0.0.0:8000
-          ports:
-            - "8000:8000"
-  # fetching code from the repo
-  Test-Lintting:
-    docker:
-      - image: cimg/python:3.10
-        
+    # Checkout the code as the first step. This is a dedicated CircleCI step.
+    # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
+    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
+    # Then run your tests!
+    # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
       - run:
-          name: Testing and lintting my code
+          name: create and activate a virtual environment, and install packages
+          command: pip install -r requirements.txt
+      - run:
           command: |
-            flake8
-            pytest
-  # running a node container
-  Containerization:
-    build:
-    run:
-    push:
-    pull:
-    run:
-      
-  Deploy:
+            python3 -m venv venv
+            . venv/bin/activate
+      - run:
+          name: test my application
+          command: python3 manage.py test
+      - run:
+          name: Linting
+          command: flake8
+
+  dockerisation :
     docker:
       - image: cimg/python:3.10
-        
     steps:
-      - run:
-          name: Running the Node Container
-          command: |
-            node -v
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.22
+          docker_layer_caching: true
+      - run: |
+          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      # Build the Docker image from Docker hub using the environment variables defined in my circle ci setting
+      - run: docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$image-docker .
+      # Push this Docker image into Docker hub
+      - run: docker push $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$image-docker
+      
+  
+  #deployment:
+
+# define the workflow with the desired order to launch each job
 workflows:
-  Workflow-OC-Lettings:
+  version: 2
+  Python-OC-Lettings-FR:
     jobs:
-      - Build
-      - Test-Lintting:
+      - build-test-lintting
+      - dockerisation:
           requires:
-            - Build
-      - Deploy:
-          requires:
-            - Test-Lintting
+            - build-test-lintting
+          filters:
+            branches:
+              only: master
+      #- deployment:
+          #requires:
+            #- dockerisation
+          #filters:
+            #branches:
+              #only: master
+Footer
