@@ -21,11 +21,14 @@ jobs:
             . venv/bin/activate
       - run:
           name: Test my application
-          command: python3 manage.py test
+          command: | 
+            . venv/bin/activate
+            pytest
       - run:
           name: Linting
-          command: flake8
-
+          command: | 
+            . venv/bin/activate
+            flake8
   dockerisation :
     docker:
       - image: cimg/python:3.10
