@@ -12,14 +12,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: create and activate a virtual environment, and install packages
+          name: Install packages
           command: pip install -r requirements.txt
       - run:
+          name: Create and activate a virtual environment
           command: |
             python3 -m venv venv
             . venv/bin/activate
       - run:
-          name: test my application
+          name: Test my application
           command: pytest
       - run:
           name: Linting
