@@ -20,7 +20,7 @@ jobs:
             . venv/bin/activate
       - run:
           name: test my application
-          command: python3 manage.py test
+          command: pytest
       - run:
           name: Linting
           command: flake8
