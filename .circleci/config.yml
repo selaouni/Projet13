@@ -15,7 +15,8 @@ jobs:
           name: Create and activate a virtual environment
           command: |
             python3 -m venv venv
-            . venv/bin/activate
+            #. venv/bin/activate
+            source env/bin/activate
       - run:
           name: Install packages
           command: pip install -r requirements.txt
