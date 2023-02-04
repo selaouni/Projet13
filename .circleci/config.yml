@@ -1,7 +1,6 @@
 
 version: 2.1
-orbs:
-  python: circleci/python@1.5.0
+
 
 jobs:
   build-test-lintting:
@@ -31,6 +30,13 @@ jobs:
           command: | 
             . venv/bin/activate
             flake8
+            
+      - run:
+          name: Update
+          command: | 
+            . venv/bin/activate
+            pip install --upgrade pip
+           
   dockerisation :
     docker:
       - image: cimg/python:3.10
