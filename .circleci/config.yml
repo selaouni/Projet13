@@ -1,13 +1,14 @@
 
 version: 2.1
 
+  python: circleci/python@1.5.0
 
 jobs:
   build-test-lintting:
 
     docker:
       # available images on: https://circleci.com/developer/images/image/cimg/python
-      - image: cimg/python:3
+      - image: cimg/python:3.10
 
     steps:
       - checkout
