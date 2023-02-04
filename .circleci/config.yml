@@ -33,9 +33,8 @@ jobs:
             
       - run:
           name: Update
-          command: | 
-            . venv/bin/activate
-            pip install --upgrade pip
+          command: pip install --upgrade pip
+            
            
   dockerisation :
     docker:
