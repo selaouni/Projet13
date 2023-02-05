@@ -24,11 +24,15 @@ jobs:
      
       - run:
           name: Test my application
-          command: pytest
+          command: |
+            . venv/bin/activate
+            pytest
             
       - run:
           name: Linting
-          command: flake8
+          command: |
+            . venv/bin/activate
+            flake8
             
             
       - run:
