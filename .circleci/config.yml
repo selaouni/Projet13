@@ -24,14 +24,12 @@ jobs:
      
       - run:
           name: Test my application
-          command: | 
+          command: pytest
             
-            pytest
       - run:
           name: Linting
-          command: | 
+          command: flake8
             
-            flake8
             
       #- run:
           #name: Update
