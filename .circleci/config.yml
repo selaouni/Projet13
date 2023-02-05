@@ -1,0 +1,75 @@
+
+version: 2.1
+orbs:
+  python: circleci/python@1.5.0
+jobs:
+  build-test-lintting:
+
+    docker:
+      # available images on: https://circleci.com/developer/images/image/cimg/python
+      - image: cimg/python:3.10
+
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Create and activate a virtual environment
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+      - run:
+          name: Install packages
+          command: pip install -r requirements.txt
+     
+      - run:
+          name: Test my application
+          command: pytest
+            
+      - run:
+          name: Linting
+          command: flake8
+            
+            
+      #- run:
+          #name: Update
+          #command: pip install --upgrade pip
+            
+           
+  dockerisation :
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.22
+          docker_layer_caching: true
+      - run: |
+          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      # Build the Docker image from Docker hub using the environment variables defined in my circle ci setting
+      - run: docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$image-docker .
+      # Push this Docker image into Docker hub
+      - run: docker push $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$image-docker
+      
+  
+  #deployment:
+
+# define the workflow with the desired order to launch each job
+workflows:
+  version: 2
+  Python-OC-Lettings-FR:
+    jobs:
+      - build-test-lintting
+      - dockerisation:
+          requires:
+            - build-test-lintting
+          filters:
+            branches:
+              only: master
+      #- deployment:
+          #requires:
+            #- dockerisation
+          #filters:
+            #branches:
+              #only: master
+
