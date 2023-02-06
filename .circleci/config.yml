@@ -48,6 +48,7 @@ jobs:
       - setup_remote_docker:
           #version: 20.10.22
           docker_layer_caching: true
+
       - run: |
           #echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
           #echo "$DOCKERHUB_PAT" | docker login --username $DOCKERHUB_USERNAME --password-stdin
