@@ -9,6 +9,7 @@ cryptography==39.0.0
 delegator.py==0.1.1
 distro==1.8.0
 Django==3.0
+pyyaml
 docker
 docker-app
 docker-build
