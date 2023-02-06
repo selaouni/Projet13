@@ -26,3 +26,4 @@ exceptiongroup==1.1.0
 flake8==3.7.0
 pytest==7.2.1
 pytest-django==3.9.0
+pip==21.3.1
