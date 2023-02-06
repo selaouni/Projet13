@@ -49,7 +49,8 @@ jobs:
           #version: 20.10.22
           docker_layer_caching: true
       - run: |
-          echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+          #echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+          echo "$DOCKERHUB_PAT" | docker login --username $DOCKERHUB_USERNAME --password-stdin
       # Build the Docker image from Docker hub using the environment variables defined in my circle ci setting
       - run: docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$image-docker .
       # Push this Docker image into Docker hub
