@@ -66,7 +66,7 @@ jobs:
     machine: True
     steps:
         - checkout
-          - run:
+        - run:
           name: Deploy under Heroku
           command: |
             sudo curl https://cli-assets.heroku.com/install.sh | sh
