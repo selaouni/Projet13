@@ -43,7 +43,7 @@ pytest==7.2.1
 pytest-django==3.9.0
 python-dotenv==0.21.1
 pytz==2022.7.1
-PyYAML==3.10
+PyYAML==3.11
 requests==2.28.2
 six==1.16.0
 sqlparse==0.4.3
