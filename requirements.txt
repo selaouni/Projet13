@@ -14,7 +14,7 @@ docker-app
 docker-build
 docker-build-tool
 docker-cli
-docker-compose
+
 docker-pycreds
 dockerpty
 docopt==0.6.2
