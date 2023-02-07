@@ -51,6 +51,7 @@ jobs:
       - run: |
           #echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
           echo "$DOCKERHUB_PAT" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+          
 
       # Build the Docker image from Docker hub using the environment variables defined in my circle ci setting
 
