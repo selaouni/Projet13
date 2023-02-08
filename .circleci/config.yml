@@ -38,7 +38,6 @@ jobs:
             
            
   dockerisation :
-
     steps:
       - checkout
       - setup_remote_docker:
