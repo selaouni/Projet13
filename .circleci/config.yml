@@ -14,10 +14,6 @@ jobs:
             . venv/bin/activate
           when: always
       - run:
-          name: Install packages
-          command: pip install -r requirements.txt
-          when: always
-      - run:
           name: Test my application
           command: |
             . venv/bin/activate
