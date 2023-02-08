@@ -7,8 +7,7 @@ jobs:
 
     docker:
       # available images on: https://circleci.com/developer/images/image/cimg/python
-      # - image: cimg/python:3.10
-      - image : python:3.8-slim-buster
+      - image: cimg/python:3.10
 
     steps:
       - checkout
@@ -42,12 +41,13 @@ jobs:
             
            
   dockerisation :
-
+    docker:
+      - image: cimg/python:3.10
     steps:
       - checkout
-#      - setup_remote_docker:
-#          #version: 20.10.22
-#          docker_layer_caching: true
+      - setup_remote_docker:
+          #version: 20.10.22
+          docker_layer_caching: true
       # Docker connection
       - run: |
           #echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
