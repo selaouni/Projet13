@@ -1,6 +1,7 @@
 
 version: 2.1
-
+orbs:
+  python: circleci/python@1.5.0
 jobs:
   build-test-lintting:
 
@@ -38,6 +39,7 @@ jobs:
             
            
   dockerisation :
+
     steps:
       - checkout
       - setup_remote_docker:
