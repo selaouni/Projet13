@@ -33,18 +33,11 @@ jobs:
           command: |
             . venv/bin/activate
             flake8
-            
-            
-
-            
            
   dockerisation :
-
+    machine : true
     steps:
       - checkout
-      - setup_remote_docker:
-          #version: 20.10.22
-          docker_layer_caching: true
       # Docker connection
       - run: |
           #echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
