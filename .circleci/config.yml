@@ -42,8 +42,7 @@ jobs:
             
            
   dockerisation :
-#    docker:
-#      - image: cimg/python:3.10
+
     steps:
       - checkout
 #      - setup_remote_docker:
