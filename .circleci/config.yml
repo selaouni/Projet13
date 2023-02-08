@@ -35,9 +35,7 @@ jobs:
             flake8
             
             
-#      - run:
-#          name: Update
-#          command: pip install --upgrade pip
+
             
            
   dockerisation :
