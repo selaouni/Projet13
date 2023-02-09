@@ -10,5 +10,3 @@ urlpatterns = [
     path('', include('profiles.urls')),
 
 ]
-
-
