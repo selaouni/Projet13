@@ -75,3 +75,45 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+
+### Déploiement
+
+Avant de passer au déploiement des étapes de test, linting et de dockerisation sont essentiel.
+La pepline est composé de 3 job: 
+
+    - build-test-lintting: qui lance les commandes Pytest et flake8 pour tester l'application et pour faire le linting.
+    - dockerization: qui contruit l'image puis la push vers Docker hub.
+    - deployment: qui lance les commandes necessaires pour deployer le site sous la plateforme heroku.
+
+En plus des documents de base de l'application django, deux fichiers essentiels ont été ajoutés pour assurer le bon fonctionnement de la pepline:
+    - Dockerfile: Définit la cofiguration nécessaire pour dockeriser l'application
+    - Config.yml: Definit les jobs et le workflow da la pepeline ci/ci sous circle ci
+
+Chaque modification poushée sous Github déclenche une pepline sous circle ci selon les regles de l'énoncé ci dessous:
+
+- Configurez le déploiement de manière à ce que seules les modifications apportées à la branche master dans GitHub déclenchent la conteneurisation et le déploiement du site vers Heroku.
+- Les modifications apportées aux autres branches doivent uniquement déclencher la compilation et les tests (sans déployer le site vers Heroku ou effectuer la conteneurisation)
+- Le déploiement doit être répétable ; par exemple, vous devez pouvoir recréer facilement un déploiement supprimé dans Heroku.
+- La tâche de conteneurisation ne doit être exécutée que si la compilation et de test sont réussies.
+- Le travail de déploiement et de production ne doit s'exécuter que si le travail de conteneurisation est réussi.
+
+les prerequis en terme d'outil et platforme: 
+- Installation de Docker Desktop + création d'un compte Dockerhub qu'il faut relier à Docker Hub
+- Un compte CircleCI lié au repo distant de votre repo Git
+- Un compte Heroku + création d'une application qui est liée aussi au projet en question sous git
+- Un compte Sentry lié à l'application django (voir commande et config sous sentry)
+
+Variables d'environnement suivantes  (A définir dans circle ci :dans le setting du projet / menu Environment Variables):
+
+DOCKERHUB_USERNAME : Correspond à votre login Docker hub,
+DOCKERHUB_PAT: token défini au niveau des setting de Docker hub
+DOCKERHUB_NAME_IMAGE: le nom donné à l'image Docker
+HEROKU_TOKEN : vous pouvez trouver le Token de votre application dans le setting Heroku / heroku authorizations:create
+HEROKU_APP_NAME : nom de l'appliaction sous Heroku
+
+
+Au niveau de l'onglet "Settings" de l'application Heroku, Definir les Configs Vars suivants : 
+- DEBUG : False
+- SECRET_KEY : correspond à la clef secrète Django.
+
