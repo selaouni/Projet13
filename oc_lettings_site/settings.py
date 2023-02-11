@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     'oc-letting1.herokuapp.com',
                 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Application definition
