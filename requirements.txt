@@ -13,3 +13,6 @@ distro==1.8.0
 flake8==3.7.0
 Django
 six==1.16.0
+Docker
+django-heroku
+gunicorn==20.1.0
