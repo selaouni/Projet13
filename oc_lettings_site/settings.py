@@ -118,8 +118,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-
 # import sentry_sdk
 # from sentry_sdk.integrations.django import DjangoIntegration
 #
