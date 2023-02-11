@@ -17,7 +17,7 @@ SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
 # ALLOWED_HOSTS = []
 
 # SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
