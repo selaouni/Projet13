@@ -20,6 +20,10 @@ jobs:
           command: pip install -r requirements.txt
           when: always
       - run:
+          name: Migrate the database
+          command: python manage.py migrate
+          when: always
+      - run:
           name: Test my application
           command: |
             . venv/bin/activate
