@@ -13,3 +13,5 @@ distro==1.8.0
 flake8==3.7.0
 Django
 six==1.16.0
+whitenoise-6.3.0
+gunicorn
