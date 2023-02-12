@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
+            echo "$DOCKERHUB_PAT" | docker login --username $DOCKERHUB_USERNAME --password-stdin
             docker pull $DOCKERHUB_NAME_IMAGE
             docker tag $DOCKERHUB_NAME_IMAGE registry.heroku.com/HEROKU_APP_NAME/web
             sudo curl https://cli-assets.heroku.com/install.sh | sh
