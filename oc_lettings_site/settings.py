@@ -26,7 +26,8 @@ DEBUG = int(os.environ.get('DEBUG', default=0))
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'oc-letting1.herokuapp.com',
+    # 'oc-letting1.herokuapp.com',
+    'heroku.com/apps/oc-lettings1'
                 ]
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
