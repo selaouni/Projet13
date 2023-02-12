@@ -49,17 +49,11 @@ jobs:
       - run: docker push $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE:$"0.1.${CIRCLE_BUILD_NUM}"
       # push image under Heroku
 
-      #- run: docker pull $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE
-      #- run: docker tag $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE registry.heroku.com/HEROKU_APP_NAME/web
-
-
 
   deployment:
     machine: true
     steps:
       - checkout
-      - run: docker tag $DOCKERHUB_USERNAME/$DOCKERHUB_NAME_IMAGE registry.heroku.com/HEROKU_APP_NAME/web
-      - run: docker push registry.heroku.com/HEROKU_APP_NAME/web
       - run:
           name: Deploy to Heroku
           command: |
