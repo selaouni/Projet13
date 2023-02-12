@@ -1,1 +1,1 @@
-web: gunicorn m Python-OC-Lettings-FR.wsgi
+web: gunicorn m oc_lettings_site.wsgi
