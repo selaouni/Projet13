@@ -54,6 +54,8 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: |
+            docker pull $DOCKERHUB_NAME_IMAGE
+            docker tag $DOCKERHUB_NAME_IMAGE registry.heroku.com/HEROKU_APP_NAME/web
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a $HEROKU_APP_NAME web
